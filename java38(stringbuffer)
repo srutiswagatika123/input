@@ -1,0 +1,262 @@
+StringBuffer
+
+1) String Buffer is a class present in the java.lang package.
+2) StringBuffer is a final class so it can’t be inharited.
+3) StringBuffer is a mutable class so it is possible to change the content in the same location.
+4) StringBuffer .equals() method is used for reference comparision.
+5) Java StringBuffer class is thread-safe i.e.multiple threads cannot access it simultaneously.
+So it is safe and will result in an order.
+Constructors:-
+
+1) StringBuffer sb=new StringBuffer();
+2) StringBuffer sb2=new StringBuffer(String str);
+3) StringBuffer sb1=new StringBuffer(int capacity);
+
+ We can create a StringBuffer object by first allotting memory to the StringBuffer 4)
+object using new operator and later storing the String into it as:
+StringBuffer sb = new StringBuffer (30); 5)
+In general a StringBuffer object will be created with a default capacity of 16 characters. Here,
+StringBuffer object is created as an empty object with a capacity for storing 30 characters. Even if we
+declare the capacity as 30, it is possible to store more than 30 characters into StringBuffer. To store
+characters, we can use append () method as: 6)
+Sb1.append (“Kiran”);
+Important methods of StringBuffer class
+1. public synchronized StringBuffer append(String s): is used to append the
+specified string with this string. The append() method is overloaded like
+append(char), append(boolean), append(int), append(float), append(double) etc.
+2. public synchronized StringBuffer insert(int offset, String s): is used to
+insert the specified string with this string at the specified position. The insert()
+method is overloaded like insert(int, char), insert(int, boolean), insert(int, int),
+insert(int, float), insert(int, double) etc.
+3. public synchronized StringBuffer replace(int startIndex, int endIndex,
+String str): is used to replace the string from specified startIndex and endIndex.
+4. public synchronized StringBuffer delete(int startIndex, int endIndex): is
+used to delete the string from specified startIndex and endIndex.
+5. public synchronized StringBuffer reverse(): is used to reverse the string.
+6. public int capacity(): is used to return the current capacity.
+7. public void ensureCapacity(int minimumCapacity): is used to ensure the
+capacity at least equal to the given minimum.
+8. public char charAt(int index): is used to return the character at the specified
+position.
+9. public int length(): is used to return the length of the string i.e. total number of
+characters.
+10.public String substring(int beginIndex): is used to return the substring from
+the specified beginIndex.
+11.public String substring(int beginIndex, int endIndex): is used to return the
+substring from the specified beginIndex and endIndex.
+What is mutable string
+A string that can be modified or changed is known as mutable string. StringBuffer and
+StringBuilder classes are used for creating mutable string.
+1) StringBuffer append() method
+The append() method concatenates the given argument with this string.
+class A{
+public static void main(String args[]){
+
+Mobno-9090519502 Lang Package Jitendra kumar sahoo lect38
+StringBuffer sb=new StringBuffer("Hello ");
+sb.append("Java");//now original string is changed
+System.out.println(sb);//prints Hello Java
+}
+}
+2) StringBuffer insert() method
+The insert() method inserts the given string with this string at the given position.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer("Hello ");
+sb.insert(1,"Java");//now original string is changed
+System.out.println(sb);//prints HJavaello
+}
+}
+3) StringBuffer replace() method
+The replace() method replaces the given string from the specified beginIndex and
+endIndex.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer("Hello");
+sb.replace(1,3,"Java");
+System.out.println(sb);//prints HJavalo
+}
+}
+4) StringBuffer delete() method
+The delete() method of StringBuffer class deletes the string from the specified
+beginIndex to endIndex.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer("Hello");
+sb.delete(1,3);
+System.out.println(sb);//prints Hlo
+}
+}
+
+5) StringBuffer reverse() method
+The reverse() method of StringBuilder class reverses the current string.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer("Hello");
+sb.reverse();
+System.out.println(sb);//prints olleH
+}
+6) StringBuffer capacity() method
+The capacity() method of StringBuffer class returns the current capacity of the buffer.
+The default capacity of the buffer is 16. If the number of character increases from its
+
+current capacity, it increases the capacity by (oldcapacity*2)+2. For example if your
+current capacity is 16, it will be (16*2)+2=34.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer();
+System.out.println(sb.capacity());//default 16
+sb.append("Hello");
+System.out.println(sb.capacity());//now 16
+sb.append("java is my favourite language");
+System.out.println(sb.capacity());//now (16*2)+2=34 i.e (oldcapacity*2)+2
+}
+}
+7) StringBuffer ensureCapacity() method
+The ensureCapacity() method of StringBuffer class ensures that the given capacity is the
+minimum to the current capacity. If it is greater than the current capacity, it increases
+the capacity by (oldcapacity*2)+2. For example if your current capacity is 16, it will be
+(16*2)+2=34.
+class A{
+public static void main(String args[]){
+StringBuffer sb=new StringBuffer();
+System.out.println(sb.capacity());//default 16
+sb.append("Hello");
+System.out.println(sb.capacity());//now 16
+sb.append("java is my favourite language");
+System.out.println(sb.capacity());//now (16*2)+2=34 i.e (oldcapacity*2)+2
+sb.ensureCapacity(10);//now no change
+System.out.println(sb.capacity());//now 34
+sb.ensureCapacity(50);//now (34*2)+2
+System.out.println(sb.capacity());//now 70
+}
+}
+
+StringBuilder
+
+It is a predefined class in java.lang package can be used to handle the String. StringBuilder class
+is almost similar to to StringBuffer class. It is also a mutable object.
+The main difference StringBuffer and StringBuilder class is StringBuffer is thread safe that means
+only one threads allowed at a time to work on the String where as StringBuilder is not thread safe
+that means multiple threads can work on same String value.
+Important Constructors of StringBuilder class
+1. StringBuilder(): creates an empty string Builder with the initial capacity of 16.
+2. StringBuilder(String str): creates a string Builder with the specified string
+3. StringBuilder(int length): creates an empty string Builder with the specified
+capacity as length.
+1) StringBuilder append() method
+The StringBuilder append() method concatenates the given argument with this string.
+class A{
+public static void main(String args[]){
+
+StringBuilder sb=new StringBuilder("Hello ");
+sb.append("Java");//now original string is changed
+System.out.println(sb);//prints Hello Java
+}
+}
+2) StringBuilder insert() method
+The StringBuilder insert() method inserts the given string with this string at the
+given position.
+class A{
+public static void main(String args[]){
+StringBuilder sb=new StringBuilder("Hello ");
+sb.insert(1,"Java");//now original string is changed
+System.out.println(sb);//prints HJavaello
+}
+}
+When we use String, StringBuffer and StringBuilder
+ If the content is fixed and would not change frequently then we use String.
+ If content is not fixed and keep on changing but thread safety is required then we use
+StringBuffer
+ If content is not fixed and keep on changing and thread safety is not required then we use
+StringBuilder
+Difference between StringBuffer and StringBuilderAll the things between StringBuffer and
+StringBuilder are same only difference is StringBuffer is synchronized and StringBuilder is not
+synchronized. synchronized means one thread is allow at a time so it thread safe. Not synchronized
+means multiple threads are allow at a time so it not thread safe.
+StringBuffer StringBuilder
+1 It is thread safe. It is not thread safe.
+2
+Its methods are synchronized and provide
+thread safety.
+
+Its methods are not synchronized and unable to
+provide thread safety.
+
+3
+Relatively performance is low because thread
+need to wait until previous process is
+complete.
+
+Relatively performance is high because no need
+to wait any thread it allows multiple thread at a
+time.
+
+1 Introduced in 1.0 version. Introduced in 1.5 version.
+Chaining of Methods
+For most of the methods in String and StringBuffer the returntypes are the same String and
+StringBuffer objects only.
+After Applying a method we are allowed to call another method on the result which forms a method
+
+change. sb.m1().m2().m3().m4().m5().....;
+
+All these method calls will execute from left to right.
+StringBuffer sb = new StringBuffer(“raju”);
+
+sb.append("software").reverse().insert(2,"abc").delete(2,5).append("xyz");
+
+How to create Immutable class?
+There are many immutable classes like String, Boolean, Byte, Short, Integer, Long,
+Float, Double etc. In short, all the wrapper classes and String class is immutable. We
+
+can also create immutable class by creating final class that have final data members
+as the example given below:
+Example to create Immutable class
+In this example, we have created a final class named Employee. It have one final
+datamember, a parameterized constructor and getter method.
+public final class Employee{
+final String pancardNumber;
+public Employee(String pancardNumber){
+this.pancardNumber=pancardNumber;
+}
+public String getPancardNumber(){
+return pancardNumber;
+} }
+
+StringTokenizer
+
+It is a pre defined class in java.util package can be used to split the given string into
+tokens (parts) based on delimiters (any special symbols or spaces).
+Methods of StringTokenizer
+• hasMoreTokens()
+• nextToken()
+hasMoreTokens():
+It is predefined method of StringTokenizer class used to check whether given
+StringTokenizer having any elements or not.
+nextToken():
+Which can be used to get the element from the StringTokenizer.
+int countTokens():returns the total number of tokens.
+Example of StringTokenizer
+import java.util.*;
+class Stringtokenizerdemo
+{
+public static void main(String args[])
+{
+String str="He is a gentle man";
+StringTokenizer st=new StringTokenizer(str," ");
+System.out.println("The tokens are: ");
+while(st.hasMoreTokens())
+{
+String one=st.nextToken();
+System.out.println(one);
+}
+}
+}
+Output:
+Output
+The tokens are:
+He
+is
+a
+gentle
+man

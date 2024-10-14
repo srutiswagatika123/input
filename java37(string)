@@ -1,0 +1,189 @@
+String
+
+1) String is a predefined final class it is present in java.lang package.
+2) It can not be inherited.
+3) Generally, string is a sequence of characters. But in java, string is
+an object that represents a sequence of characters. String class is
+used to create string object
+4) Once we are creating String object it is not possible to do the modifications on
+existing object called immutability nature.
+5) It has some predefined constructor and predefined method.
+6) The constructor of String class is overload.
+How to create String object
+There are two ways to create String object:
+1.By new keyword
+2.By string literal
+(1)By new keyword or String Class Constructor
+a) String s = new String(); Creates an empty String Object.
+b) String s = new String(String literal);
+c) String s = new String(StringBuffer s);
+d) String s = new String(char [] ch);
+char[] ch = {‘a’,’b’,’c’,’d’};
+String s = new String(ch);
+System.out.println(s); O/P:--abcd
+e) String s = new String(byte[] b);
+
+byte[] b = {100,101,102,103,104};
+String s = new String(b);
+System.out.println(s);
+O/P:--defgh.
+
+f) byte[] b1={65,66,67,68,69,70};
+String s=new String(b1,2,4);
+System.out.println(s);
+o/p:--CDEF
+(2)By string literal
+Java String literal is created by using double quotes. For Example:
+1. String s="lakshya";
+Each time you create a string literal, the JVM checks the string constant
+pool first. If the string already exists in the pool, a reference to the pooled
+instance is returned. If string doesn't exist in the pool, a new string
+instance is created and placed in the pool. For example:
+String s1="welcome";
+String s2="welcome";//will not create new instance
+ PACKAGE Jitendra kumar sahoo lecture-37
+String s=new String("Welcome");//creates two objects and one reference
+variable
+In such case, JVM will create a new string object in normal(non pool)
+heap memory and the literal "Welcome" will be placed in the string
+constant pool. The variable s will refer to the object in heap(non pool).
+Note: String objects are stored in a special memory area known as string
+constant pool.If a string object is created directly,using assignment
+operator.String s1-“hi”;then it is stored In string constant pool
+Note:- The Object present in the scp is not eligible for garbage collection
+even though the object doesn‟t have any reference variables.All the scp
+objects will be destroyed at the time of JVM shutdown.
+
+Ex:
+String s1 = new String("maha");
+String s2 = new String("maha");
+String s3 = "maha";
+String s4 = "maha";
+Note:- In the scp there is no chance of 2 string objects with the same
+content i.e duplicate string objects won‟t present in scp.
+
+
+Good points :-Each and every object is stored in heap area. The heap area is divided into
+different pools.
+
+1) Referenced pool
+In the referenced pool all the objects references
+maintained.
+2) Object pool
+In this pool all the objects are located here by using new operator
+3) Thread pool
+In java we are able to create a thread object which not contains any lock
+4) String pool
+Without using new operator we are creating objects such type of the objects are
+located here(ex:-String object).
+Immutable String in Java
+In java, string objects are immutable. Once we created String objects
+we are not allowed to perform any changes in the existing object. If u r
+trying to perform any changes with those changes a new String object will
+be created this behavior is nothing but „immutability‟ Of the String
+Objects.
+
+Ex:String s1 = new String("raju");
+s1.concat("Lesto");
+System.out.println(s1);
+O/P:- raju
+Once we created a StringBuffer object we are allowed perform any changes
+
+in the existing object only. This behavior is nothing but ‘mutability’ of the StringBuffer
+object.
+Ex:
+StringBuffer sb1 = new StringBuffer("raju");
+sb1.append("Lesto");
+System.out.println(sb1);
+O/P:- rajuLesto
+Ex:
+String s1 = new String("lesto");
+String s2 = new String("lesto");
+System.out.println(s1 == s2); false
+System.out.println(s1.equals(s2)); true
+In String class .equals method is overridden for content comparision.
+StringBuffer sb1 = new StringBuffer("lesto");
+StringBuffer sb2 = new StringBuffer("lesto");
+System.out.println(sb1 == sb2) ;false
+System.out.println(sb1.equals(sb2)); false
+In the StringBuffer .equals method is not overridden for content comparison.
+Hence Object class .equals method will be executed which is meant for reference
+comparison.
+Important Methods of String Class
+1)public char charAt(int index);
+String s = “raju”;
+System.out.println(s.chartAt(2));
+O/P----j
+System.out.println(s.charAt(10));
+O/P----StringIndexOutOfBoundsException.
+2) The overloaded ‘+’ and ‘+=’ operators acts as concatenation operation only.
+Public String concat(String s)
+Ex:- String s = ”raju”;
+s = s.concat(“lesto”);
+s = s+”lesto”;
+s += “lesto”;
+System.out.println(s);
+3)(i)Public Boolean equals(Object o)
+It checks for content comparision.
+in this case of hetrogenious objects this method returns false.
+String s = "lesto";
+System.out.println(s.equals("LESTO"));
+System.out.println(s.equals("lesto"));
+
+(ii)Public Boolean equalsIgnoreCase(String s);
+String s = "lesto";
+System.out.println(s.equalsIgnoreCase("LESTO"));
+Note:- Usually for validating username(where the case is not important method,we can use
+equals ignore case method) But for validating passwords we can use eauals method where
+the case is important.
+4) public int length();
+String s = "lesto";
+System.out.println(s.length);
+O/P:-C.E System.
+out.println(s.length()); O/P:-5
+length is the variable applicable for array objects,
+But length() is the method applicable for String Object.
+5) public String replace(char old, char new);
+String s = "ababa";
+System.out.println(s.replace('a','b'));
+O/P:-bbbbb
+6)(i)public String substring(int begin);
+String s = "abcdefgh";
+System.out.println(s.substring(3));
+O/P:-defgh
+(ii)public String substring(int begin, int end);
+Returns the characters from (begin) index to (end-1) index.
+String s = "abcdefgh";
+System.out.println(s.substring(3,6));
+O/P:-def.
+7) public String toLowerCase();
+public String toUpperCase();
+Ex:- String s = “RoyalChallange”;
+System.out.println(s.toLowerCase());
+System.out.println(s.toUpperCase());
+8)public String trim()
+to remove blank spaces present at Starting and Ending of the Sting.
+But not middle blank spaces.
+String s = " raju 12 ";
+System.out.println(s.trim());
+O/P:-raju 12
+9)public int indexOf(char ch);
+returns first occurance index
+public int lastIndexOf(char ch);
+(10)int compareTo(String)
+
+The String compareTo() method compares values lexicographically and returns an integer
+value that describes if first string is less than, equal to or greater than second string.
+Suppose s1 and s2 are two string variables. If:
+s1 == s2 :0
+s1 > s2 :positive value
+s1 < s2 :negative value
+class Teststringcomparison4{
+public static void main(String args[]){
+String s1="Sachin";
+String s2="Sachin";
+String s3="Ratan";
+System.out.println(s1.compareTo(s2));//0
+System.out.println(s1.compareTo(s3));//1(because s1>s3)
+System.out.println(s3.compareTo(s1));//-1(because s3 < s1 )
+} }

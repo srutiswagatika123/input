@@ -1,0 +1,468 @@
+The most commonly used and general purpose classes which are required for any java
+program are grouped into a package which is nothing but a “java.lang.package”.
+All the classes and interfaces which are available in this package are by default
+available to any java program. There is no need to import this class.
+
+Object Class
+
+The most common general methods which can be applicable on any java object are
+defined in object class. Object class is the parent class of any java class, whether it is
+predefined or programmer defined, hence all the object class methods are by default
+available to any java class.
+Object class define the following 11 methods
+ clone()
+
+Creates a new object of the same class as this object.
+
+ equals(Object)
+
+Compares two Objects for equality.
+
+ finalize()
+
+Called by the garbage collector on an object when garbage collection determines that
+there are no more references to the object.
+ getClass()
+
+Returns the runtime class of an object.
+
+ hashCode()
+
+Returns a hash code value for the object.
+
+ notify()
+
+Wakes up a single thread that is waiting on this object's monitor.
+
+ notifyAll()
+
+Wakes up all threads that are waiting on this object's monitor.
+
+ toString()
+
+Returns a string representation of the object.
+
+ wait()
+
+Waits to be notified by another thread of a change in this object.
+
+ wait(long)
+
+Waits to be notified by another thread of a change in this object.
+
+ wait(long, int)
+
+Waits to be notified by another thread of a change in this object.
+
+(1)toString()
+To return String representation of an object.
+public String toString()
+{
+return getClass.getName() + '@' + Integer.toHexString(HashCode);
+}
+
+Ex:
+class Student
+{
+String name;
+int rollno;
+Student(String name,int rollno)
+{
+this.name = name;
+this.rollno = rollno;
+}
+public static void main(String arg[])
+{
+Student s1 = new Student ("raju", 101);
+Student s2 = new Student ("giri", 102);
+System.out.println(s1); Student@10b62c9
+System.out.println(s2); Student@82ba41
+}
+}
+
+When ever we are passing object reference as argument to s.o.p() internally JVM will call
+toString() on that object.
+If we are not providing toString() then Object class toString() will be executed which is
+implemented as follows
+public String toString()
+{
+Return getClass.getName() + „@‟ + Integer.toHexString(hashCode);
+}
+Based on our requirement to provide our own String representation we have to override
+toString()
+Ex:
+If we are printing Student Object reference to return name & roll no we have to
+override toString() as follows
+public String toString()
+{
+return name+”--------“+rollno;
+}
+If we can place this toString() in student class then the O/P
+is raju-----101
+giri-----102
+It is highly recommended to override toString() in our classes.
+
+(2)hashCode()
+The hashCode of an Object just represents a random number which can be used by
+JVM while saving/adding Objects into Hashsets, Hashtables or Hashmap.
+hashCode() of Object class implemented to return hashCode based on address of an object,
+but based on our requirement we can override hashCode() to generate our own numbers as
+hashCodes.when 2 different references point to 2 different objects then hashCode() method
+generates different random number but on the otherhand when 2 different references to the
+same object then hashCode() method generate same random number.
+Case1:
+EX:
+class Test
+{
+int i; Test(int i)
+{
+this.i = i;
+}
+public int hashCode()
+{
+return i;
+}
+public static void main(String arg[])
+{
+Test t1 = new Test(100);
+Test t2 = new Test(110);
+System.out.println(t1);
+System.out.println(t2);
+}
+}
+output:
+Test@64
+Test@6e
+EX:
+Case2:
+class hashCodeDemo
+{
+int i;
+hashCodeDemo(int i)
+
+{
+this.i = i;
+}
+public int hashCode()
+{
+return i;
+}
+public String toString()
+{
+return i + "";
+}
+public static void main(String arg[])
+{
+hashCodeDemo h1 = new hashCodeDemo(100);
+hashCodeDemo h2 = new hashCodeDemo(110);
+System.out.println(h1);
+System.out.println(h2);}}
+Output:100 110
+(3)equals()
+class Student
+{
+String name;
+int rollno;
+Student(String name,int rollno)
+{
+this.name = name;
+this.rollno = rollno;
+}
+public static void main(String arg[])
+{
+Student s1 = new Student ("raju", 101);
+Student s2 = new Student ("giri", 102);
+Student s3 = new Student ("giri", 102);
+System.out.println(s1.equals(s2));
+System.out.println(s2.equals(s3));
+}
+}
+r1 == r2 reference Comparision.
+r1.equals(r2) reference. Comparision.
+Note: In this case Object class .equals() has executed which is meant for reference comparison but
+based on our requirement it is recommended to override .equals() for content comparison.
+By over loading .equals() we have to consider the following 3 cases
+Case1: The meaning of equality
+Case2: In the case of heterogeneous objects we have to return false. (i.e) we have to handle
+
+ClassCastException to return false.
+Case3: If we are passing null as the argument we have return false. (i.e) we have to handle
+NullPointerException to return false.
+Overridden methods of equals
+Ex:
+class Student
+{
+String name;
+int rollno;
+Student(String name,int rollno)
+{
+this.name = name;
+this.rollno = rollno;
+}
+public boolean equals(Object obj)
+{
+try
+{
+String name1 = this.name;
+int rollno1 = this.rollno;
+Student s2 = (Student)obj;
+String name2 = s2.name;
+int rollno2 = s2.rollno;
+if(name1.equals(name2) && rollno1 == rollno2)
+{
+return true;
+}
+else
+{
+return false;
+}
+}
+catch (ClassCastException c)
+{
+return false;
+}
+catch (NullPointerException e)
+{
+return false;
+}
+}
+public static void main(String arg[])
+{
+Student s1 = new Student ("raju", 101);
+Student s2 = new Student ("giri", 102);
+Student s3 = new Student ("giri", 102);
+
+System.out.println(s1.equals(s2));
+System.out.println(s2.equals(s3));
+System.out.println(s1.equals(null));
+}
+} Output:
+false
+True
+false
+Comparison between ‘==’ operator and ‘.equals()’
+
+== .equals()
+
+1)
+It is an operator and applicable
+for 1) It is a method applicable for Only
+both primitive and Object
+references. Object reference.
+2)
+For Object reference r1, r2 r1
+== 2) Default implementation available in
+r2 is true iff both r1 and r2
+pointing Object class is meant for reference
+to the same object on the heap i.e it
+is
+
+comparison only i.e r1.equals(r2) is true
+iff
+meant for reference comparision.
+
+both r1,r2 are pointing to the same
+object
+on the heap.
+
+3) We can‟t override == operator.
+
+3) We can override equals() for
+content
+comparison.
+
+4)
+IF r1 & r2 are incompatible
+then 4) If r1 & r2 are incompatible then
+r1 == r2 results Compile Time
+Error. r1.equals(r2) is always false.
+5)
+For any Object reference r, r
+== 5) For any Object reference r,
+null returns false. r.equals(null) returns false.
+
+
+Relationship between ‘==’ and .equals()
+If r1 == r2 is true then r1.equals(r2) is always true.
+If r1.equals(r2) is true, then r1 == r2 need not to be true.
+Contract Between .equals() and hashCode()
+1) If two objects are equal by .equals() then their
+hashcodes must be equal. Ex:
+If r1.equals(r2) is true then
+r1.hashCode() == r2.hashCode is also true.
+
+2) If two Objects are not equal by .equals() then their hashCode may or
+may not be same.
+3) If the hashCodes of two Objects are equal then the objects may or may
+not be equal by .equals()
+4) If the hashCodes of two Objects are not equal then the Objects are
+always not equal by .equals().
+To satisfy above contract when ever we are overriding .equals it is highly
+recommended to override hashCode() also.
+
+4.clone():
+The process of creating exactly duplicate Object is called Clonning.
+Object class contains the clone method to perform this
+protected native Object clone() throws CloneNotSupportedException
+
+Ex:
+class Test implements Cloneable
+{
+int i = 10;
+int j = 20;
+public static void main(String arg[])throws CloneNotSupportedException
+{
+Test t1 = new Test();
+Test t2 = (Test)t1.clone(); t1.i = 100;
+t1.j = 200;
+System.out.println(t2.i+"----"+t2.j);
+System.out.println(t1.i+"----"+t1.j);
+}
+}
+Output:
+10 20
+100 200
+All the Objects can’t have the capability to produce cloned Objects. Only
+clonaeble objects having that capability.An Object is said to be cloneable iff the
+corresponding class has to implement java.lang.cloneable interface.It doesn’t
+contain any methods it is a marker interface.
+Java Singleton Class Example Using Private Constructor
+We can make constructor as private. So that We can not create an
+object outside of the class.
+This property is useful to create singleton class in java.
+Singleton pattern helps us to keep only one instance of a class at
+any time.
+The purpose of singleton is to control object creation by keeping
+private constructor.
+
+
+public class MySingleTon {
+private static MySingleTon myObj;
+private MySingleTon(){
+}
+public static MySingleTon getInstance(){
+if(myObj == null){
+myObj = new MySingleTon();
+}
+return myObj;
+}
+public void getSomeThing(){
+// do something here
+System.out.println("I am here....");
+}
+public static void main(String a[]){
+MySingleTon st = MySingleTon.getInstance();
+st.getSomeThing();
+}
+}
+Runtime class :
+—It is a singleton class, hence its object cannot be created by the constructor. Therefore, the static
+method called getRuntime() is used to return an object of this class. The exec() method of this class
+is used to execute or initiate any application i.e. .exe file from the java program.
+class Runexe {
+public static void main(String args[]) throws Exception {
+Runtime rt = Runtime.getRuntime();
+Process p2 = rt.exec(“calc”);
+}};
+(2)
+public class MemoryTest{ public static void main(String args[])throws Exc
+eption{
+Runtime r=Runtime.getRuntime();
+System.out.println("Total Memory: "+r.totalMemory());
+System.out.println("Free Memory: "+r.freeMemory());
+for(int i=0;i<10000;i++){
+new MemoryTest();
+}
+System.out.println("After creating 10000 instance, Free Memory: "+r.freeMem
+ory());
+
+
+System.gc();
+System.out.println("After gc(), Free Memory: "+r.freeMemory());
+} }
+
+Total Memory: 100139008
+Free Memory: 99474824
+After creating 10000 instance, Free Memory: 99310552
+After gc(), Free Memory: 100182832
+In the given program, after creating 10000 instance, free memory will be less
+than the previous free memory. But after gc() call, you will get more free
+memory.
+Java Garbage Collection:
+In java, garbage means unreferenced objects.Garbage Collection is process of
+reclaiming the runtime unused memory automatically. In other words, it is a
+way to destroy the unused objects.To do so, we were using free() function in C
+language and delete() in C++. But, in java it is performed automatically. So,
+java provides better memory management.
+Advantage of Garbage Collection
+o It makes java memory efficient because garbage collector removes the
+unreferenced objects from heap memory.
+o It is automatically done by the garbage collector(a part of JVM) so we
+don't need to make extra efforts.
+How can an object be unreferenced?
+There are many ways:
+o By nulling the reference
+o By assigning a reference to another
+o By annonymous object etc.
+1) By nulling a reference:
+Employee e=new Employee();
+e=null;
+
+2) By assigning a reference to another:
+Employee e1=new Employee();
+Employee e2=new Employee();
+e1=e2;//now the first object referred by e1 is available for garbage collection
+3) By annonymous object:
+new Employee();
+(5)finalize() method
+The finalize() method is invoked each time before the object is garbage
+collected. This method can be used to perform cleanup processing. This method
+is defined in Object class as:
+protected void finalize(){}
+Note: The Garbage collector of JVM collects only those objects that are created by
+new keyword. So if you have created any object without new, you can use finalize
+method to perform cleanup processing (destroying remaining objects).
+gc():-
+1) Garbage collection is performed by a daemon thread called Garbage Collector(GC).
+2) internally the garbage collector is running to destroy the useless objects.
+3) by using gc() method we are able to call Garbage Collector explicitly by the developer.
+4) This thread calls the finalize() method before object is garbage collected.
+5) gc() present in System class and it is a static method.
+Syntax:- System.gc();
+3) Whenevr garbage collector is destroying useless objects just before destroying the objects
+the garbage collector is calling finalize() method on that object to perform final operation of
+particular object.
+1. public static void gc(){}
+Simple Example of garbage collection in java
+public class Test2{
+public void finalize()
+{System.out.println("object is garbage collected");}
+public static void main(String args[]){
+Test2 s1=new Test2();
+Test2 s2=new Test2();
+s1=null;
+s2=null;
+System.gc();
+}
+}
+
+
+What is the difference between final, finally and finalize() in Java?
+• final – a key word / access modifier to define constants.
+• finally – The finally block always used in conjunction with try and catch blocks, except that,
+if try block uses System.exit(0) call. It is ensured that in event of an unexpected error /
+exception, the finally block performs the execution. Not only for exception handling, finally
+also even utilized for cleaning up the code, such as returning values, continue or break
+statement usage, closing streams etc. It is a good programming practice to use cleaning up
+the code in finally block, even though exceptions are not anticipated.
+• finalize() – This method is associated with garbage collection. Just before collecting the
+garbage by the system (discarding an object from its scope), this method is invoked
+automatically.
+Final:
+A final class variable is one whose value cannot be changed.
+A final method is one that cannot be overriden (define with new behavior in subclasses).
+A final class cannot be inherited.
+Finally:
+It is a block of statements that definitely executes after the try catch block.
+Finalize:
+This method will be executed when the object is garbage-collected
